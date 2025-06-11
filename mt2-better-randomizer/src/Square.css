@@ -1,0 +1,10 @@
+.square {
+    display: flex;
+    height: 50px;
+    width: 50px;
+    color: white;
+}
+
+.cleared {
+    background-color: green;
+}
