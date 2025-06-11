@@ -107,8 +107,9 @@ function App() {
     })
     const randomCombo = possibleClans[Math.floor(Math.random()*possibleClans.length)]
 
-    const coinFlip = Math.floor(Math.random() * 2) + 1
-    setAltClan(coinFlip)
+    const coinFlip = Math.floor(Math.random() * 2)
+    const randomSubclan = randomCombo.split('/')[1]
+    setAltClan(CHAMPION_MAP[randomSubclan][coinFlip])
     setSelectedClan(randomCombo)
   }
 
@@ -121,7 +122,7 @@ function App() {
         </div>
         {clans ? <div className="container">{renderRow()}</div> : <div>loading</div>}
         <button onClick={selectClan}>RANDOMIZE</button>
-        {selectedClan && <div>{`${selectedClan} - ${altClan}`}</div>}
+        {selectedClan && <div>{`${selectedClan}(${altClan})`}</div>}
       </div>
     </>
   )
