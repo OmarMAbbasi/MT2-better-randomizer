@@ -16,6 +16,29 @@ const CHAMPION_MAP = {
   "Melting Remnant": ["Flicker", "Fade"],
 }
 
+const CHAMP_CLANS = {
+  "Fel": "Banished",
+  "Talos": "Banished",
+  "Lord Fenix": "Pyreborn",
+  "Lady Gilda": "Pyreborn",
+  "Ekka": "Luna",
+  "Arduhn": "Luna",
+  "Bolete": "Underlegion",
+  "Lionsmane": "Underlegion",
+  "Orechi": "Lazarus League",
+  "Grael": "Lazarus League",
+  "Hornbreaker": "Hellhorned",
+  "Shardtail": "Hellhorned",
+  "Sentient": "Awoken",
+  "Wyldenten": "Awoken",
+  "Tethys": "Stygian Guard",
+  "Solgard": "Stygian Guard",
+  "Penumbra": "Umbra",
+  "Primordium": "Umbra",
+  "Flicker": "Melting Remnant",
+  "Fade": "Melting Remnant",
+}
+
 const genDefaultClans = () => {
   const DEFAULT_CLANS = {};
   for (let mainClan = 0; mainClan < CLANS.length; mainClan++) {
@@ -76,7 +99,7 @@ function App() {
       const champData = clans[champion]
       Object.keys(champData).map((subClan)=> {
         if(!clans[champion][subClan]){
-          possibleClans.push(`${champion}/${subClan}`)
+          possibleClans.push(`${champion}(${CHAMP_CLANS[champion]})/${subClan}`)
         }
       })
     })
