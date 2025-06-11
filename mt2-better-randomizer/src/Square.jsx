@@ -1,35 +1,27 @@
 import { useState, useEffect } from 'react'
-// import './App.css'
+import './Square.css'
 
-function Square(mainClan, subClan) {
-
-  const [clans, setClans] = useState(false)
-
-  const genDefaultClans = () => {
-    const DEFAULT_CLANS = {};
-    for (let mainClan = 0; mainClan < CLANS.length; mainClan++) {
-      DEFAULT_CLANS[CLANS[mainClan]] = {};
-      for (let subClan = 0; subClan < CLANS.length; subClan++) {
-        if(mainClan != subClan){
-          DEFAULT_CLANS[CLANS[mainClan]][CLANS[subClan]] = "false";
-        }
-      }
-    }
-    return DEFAULT_CLANS
+function Square({champ1, champ2, subClan, blocked, clans, setClans}) {
+  
+  const handleClick = (champ) => {
+    const newClans = structuredClone(clans)
+    newClans[champ][subClan] = !clans[champ][subClan]
+    setClans(newClans)
   }
-
-  useEffect(()=> {
-    const loadedClans = JSON.parse(localStorage.getItem('clans'));
-    loadedClans ? setClans(loadedClans) : setClans(genDefaultClans())
-  }, [])
-
+  
   return (
     <>
-      <div >
-        
+    {!!!blocked ? 
+      <div className="square">
+        <div className={clans[champ1][subClan] ? "item-complete" : "item"} onClick={() => handleClick(champ1)}>{champ1}/{subClan}</div>
+        <div className={clans[champ2][subClan] ? "item-complete" : "item"} onClick={() => handleClick(champ2)}>{champ2}/{subClan}</div>
       </div>
+      :
+      <div className="blocked"/>
+  }
+
     </>
   )
 }
 
-export default App
+export default Square

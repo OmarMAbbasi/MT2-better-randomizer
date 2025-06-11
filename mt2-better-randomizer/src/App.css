@@ -4,3 +4,44 @@
   padding: 2rem;
   text-align: center;
 }
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.topRow {
+  display: flex;
+}
+
+.topItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  padding: 5px;
+}
+
+.firstColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.columnItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  padding: 5px;
+}
+
+.mt2Icon {
+  height: 100px;
+  width: 100px;
+  padding: 15px;
+}
