@@ -65,6 +65,8 @@ function App() {
 
   const [selectedClan, setSelectedClan] = useState("");
 
+  const [altClan, setAltClan] = useState(0)
+
   useEffect(() => {
     localStorage.setItem('clans', JSON.stringify(clans));
   }, [clans]);
@@ -104,6 +106,9 @@ function App() {
       })
     })
     const randomCombo = possibleClans[Math.floor(Math.random()*possibleClans.length)]
+
+    const coinFlip = Math.floor(Math.random() * 2) + 1
+    setAltClan(coinFlip)
     setSelectedClan(randomCombo)
   }
 
@@ -116,7 +121,7 @@ function App() {
         </div>
         {clans ? <div className="container">{renderRow()}</div> : <div>loading</div>}
         <button onClick={selectClan}>RANDOMIZE</button>
-        {selectedClan && <div>{selectedClan}</div>}
+        {selectedClan && <div>{`${selectedClan} - ${altClan}`}</div>}
       </div>
     </>
   )
