@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import './Square.css'
 
-function Square({champ1, champ2, subClan, blocked, clans, setClans}) {
+function Square({champ1, champ2, subClan, blocked, clans, setClans, getImage}) {
   
   const handleClick = (champ) => {
     const newClans = structuredClone(clans)
@@ -13,16 +13,15 @@ function Square({champ1, champ2, subClan, blocked, clans, setClans}) {
     <>
     {!!!blocked ? 
       <div className="square">
-        {/* <div className={clans[champ1][subClan] ? "item-complete" : "item"} onClick={() => handleClick(champ1)}>
-          <img className="champIcon" src={`/src/assets/${champ1}.png`} />
-          <img className="clanIcon" src={`/src/assets/${subClan}.png`} />
-        </div> */}
-        {/* <div className={clans[champ2][subClan] ? "item-complete" : "item"} onClick={() => handleClick(champ2)}>
-          <img className="champIcon" src={`/src/assets/${champ1}.png`} />
-          <img className="clanIcon" src={`/src/assets/${subClan}.png`} />
-        </div> */}
-        <div className={clans[champ1][subClan] ? "item-complete" : "item"} onClick={() => handleClick(champ1)}>{champ1}/{subClan}</div>
-        <div className={clans[champ2][subClan] ? "item-complete" : "item"} onClick={() => handleClick(champ2)}>{champ2}/{subClan}</div>
+        <div className={clans[champ1][subClan] ? "item-complete" : "item"} onClick={() => handleClick(champ1)}>
+          <img className="champIcon" src={getImage(champ1)} />
+          <img className="clanIcon" src={getImage(subClan)} />
+        </div>
+        <div className={clans[champ2][subClan] ? "item-complete" : "item"} onClick={() => handleClick(champ2)}>
+          <img className="champIcon" src={getImage(champ2)} />
+          <img className="clanIcon" src={getImage(subClan)} />
+        </div>
+
       </div>
       :
       <div className="blocked"/>

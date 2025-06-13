@@ -114,7 +114,7 @@ function App() {
       const cols = []
       Object.keys(CHAMPION_MAP).forEach((subClan) => {
         if (clan !== subClan) {
-          cols.push(<Square champ1={champ1} champ2={champ2} subClan={subClan} clans={clans} setClans={setClans} />)
+          cols.push(<Square champ1={champ1} champ2={champ2} subClan={subClan} clans={clans} setClans={setClans} getImage={getImage} />)
         }
         else (cols.push(<Square blocked={true}/>))
       })
