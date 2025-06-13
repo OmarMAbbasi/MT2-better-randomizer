@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import Square from './Square.jsx'
-import Train from '/src/assets/Train.png';
 
 const CLANS = ["Banished", "Pyreborn", "Luna", "Underlegion", "Lazarus League", "Hellhorned", "Awoken", "Stygian Guard", "Umbra", "Melting Remnant"]
 const CHAMPION_MAP = {
@@ -91,6 +90,8 @@ function App() {
 
   const [altClan, setAltClan] = useState(0)
 
+  const allImages = import.meta.glob('/src/assets/*.png', { eager: true, as: 'url' });
+
   useEffect(() => {
     localStorage.setItem('clans', JSON.stringify(clans));
   }, [clans]);
@@ -142,7 +143,7 @@ function App() {
     <>
       <div>
         <div className="topRow">
-          <img className="mt2Icon" src={Train} />
+          <img className="mt2Icon" src={`${allImages['/src/assets/Train.png']}`} />
            {/* {CLANS.map((clan) => <div className='topItem'><img className="champIcon" src={`/src/assets/${clan}.png`} /></div>)} */}
           {/* <div className='mt2Icon'>MT2 ICON PLACEHOLDER</div> */}
           {CLANS.map((clan) => <div className='topItem'>{clan}</div>)}
