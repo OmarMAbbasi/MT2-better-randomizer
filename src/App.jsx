@@ -16,6 +16,29 @@ const CHAMPION_MAP = {
   "Melting Remnant": ["Flicker", "Fade"],
 }
 
+const SPELL_MAP = {
+  "Fel": "Just Cause",
+  "Talos": "Inspire",
+  "Lord Fenix": "Firestarter",
+  "Lady Gilda": "Bloated Whelp",
+  "Ekka": "Witchweave",
+  "Arduhn": "Moon Ritual",
+  "Bolete": "Eager Conscript",
+  "Lionsmane": "Sporetouch",
+  "Orechi": "Secret Ingredient",
+  "Grael": "Erratic Assistant",
+  "Hornbreaker": "Torch",
+  "Shardtail": "Queen's Impling",
+  "Sentient": "Restore",
+  "Wyldenten": "Rotseeds",
+  "Tethys": "Frozen Lance",
+  "Solgard": "Foregone Power",
+  "Penumbra": "Shadesplitter",
+  "Primordium": "Plink",
+  "Flicker": "Dreg",
+  "Fade": "Stygian Mold",
+}
+
 const CHAMP_CLANS = {
   "Fel": "Banished",
   "Talos": "Banished",
@@ -76,7 +99,7 @@ function App() {
       <div className="firstColumn">
         {CLANS.map((clan) => 
           <div className='columnItem'>
-            {clan}
+            <img className="champIcon" src={`../public/${clan}.png`} />
           </div>)
         }</div>
     ]
@@ -86,7 +109,7 @@ function App() {
       const cols = []
       Object.keys(CHAMPION_MAP).forEach((subClan) => {
         if (clan !== subClan) {
-          cols.push(<Square champ1={champ1} champ2={champ2} subClan={subClan} clans={clans} setClans={setClans}/>)
+          cols.push(<Square champ1={champ1} champ2={champ2} subClan={subClan} clans={clans} setClans={setClans} />)
         }
         else (cols.push(<Square blocked={true}/>))
       })
@@ -109,7 +132,7 @@ function App() {
 
     const coinFlip = Math.floor(Math.random() * 2)
     const randomSubclan = randomCombo.split('/')[1]
-    setAltClan(CHAMPION_MAP[randomSubclan][coinFlip])
+    setAltClan(SPELL_MAP[CHAMPION_MAP[randomSubclan][coinFlip]])
     setSelectedClan(randomCombo)
   }
 
@@ -117,8 +140,8 @@ function App() {
     <>
       <div>
         <div className="topRow">
-          <div className='mt2Icon'>MT2 ICON PLACEHOLDER</div>
-          {CLANS.map((clan) => <div className='topItem'>{clan}</div>)}
+          <img className="mt2Icon" src={`../public/Train.png`} />
+          {CLANS.map((clan) => <div className='topItem'><img className="champIcon" src={`../public/${clan}.png`} /></div>)}
         </div>
         {clans ? <div className="container">{renderRow()}</div> : <div>loading</div>}
         <button onClick={selectClan}>RANDOMIZE</button>

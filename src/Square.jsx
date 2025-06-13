@@ -13,8 +13,15 @@ function Square({champ1, champ2, subClan, blocked, clans, setClans}) {
     <>
     {!!!blocked ? 
       <div className="square">
-        <div className={clans[champ1][subClan] ? "item-complete" : "item"} onClick={() => handleClick(champ1)}>{champ1}/{subClan}</div>
-        <div className={clans[champ2][subClan] ? "item-complete" : "item"} onClick={() => handleClick(champ2)}>{champ2}/{subClan}</div>
+        <div className={clans[champ1][subClan] ? "item-complete" : "item"} onClick={() => handleClick(champ1)}>
+          <img className="champIcon" src={`../public/${champ1}.png`} />
+          <img className="clanIcon" src={`../public/${subClan}.png`} />
+        </div>
+        {/* <div className={clans[champ1][subClan] ? "item-complete" : "item"} onClick={() => handleClick(champ1)}>{champ1}/{subClan}</div> */}
+        <div className={clans[champ2][subClan] ? "item-complete" : "item"} onClick={() => handleClick(champ2)}>
+          <img className="champIcon" src={`../public/${champ1}.png`} />
+          <img className="clanIcon" src={`../public/${subClan}.png`} />
+        </div>
       </div>
       :
       <div className="blocked"/>

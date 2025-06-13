@@ -43,3 +43,15 @@
     border: 1px solid;
     background-color: green;
 }
+
+.champIcon {
+    height: 50px;
+    width: 50px;
+    object-fit: scale-down;
+}
+
+.clanIcon {
+    height: 50px;
+    width: 50px;
+    object-fit: scale-down;
+}
