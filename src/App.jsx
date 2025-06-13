@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import Square from './Square.jsx'
+import Train from '/src/assets/Train.png';
 
 const CLANS = ["Banished", "Pyreborn", "Luna", "Underlegion", "Lazarus League", "Hellhorned", "Awoken", "Stygian Guard", "Umbra", "Melting Remnant"]
 const CHAMPION_MAP = {
@@ -141,7 +142,7 @@ function App() {
     <>
       <div>
         <div className="topRow">
-          <img className="mt2Icon" src={`./src/assets/Train.png`} />
+          <img className="mt2Icon" src={Train} />
            {/* {CLANS.map((clan) => <div className='topItem'><img className="champIcon" src={`/src/assets/${clan}.png`} /></div>)} */}
           {/* <div className='mt2Icon'>MT2 ICON PLACEHOLDER</div> */}
           {CLANS.map((clan) => <div className='topItem'>{clan}</div>)}
