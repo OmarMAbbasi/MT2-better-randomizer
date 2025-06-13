@@ -141,9 +141,9 @@ function App() {
     <>
       <div>
         <div className="topRow">
-          {/* <img className="mt2Icon" src={`/src/assets/Train.png`} />
-          {CLANS.map((clan) => <div className='topItem'><img className="champIcon" src={`/src/assets/${clan}.png`} /></div>)} */}
-          <div className='mt2Icon'>MT2 ICON PLACEHOLDER</div>
+          <img className="mt2Icon" src={`/src/assets/Train.png`} />
+           {/* {CLANS.map((clan) => <div className='topItem'><img className="champIcon" src={`/src/assets/${clan}.png`} /></div>)} */}
+          {/* <div className='mt2Icon'>MT2 ICON PLACEHOLDER</div> */}
           {CLANS.map((clan) => <div className='topItem'>{clan}</div>)}
         </div>
         {clans ? <div className="container">{renderRow()}</div> : <div>loading</div>}
