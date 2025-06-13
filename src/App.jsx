@@ -90,7 +90,9 @@ function App() {
 
   const [altClan, setAltClan] = useState(0)
 
-  const allImages = import.meta.glob('/src/assets/*.png', { eager: true, as: 'url' });
+  const allImages = import.meta.glob('/src/assets/*.png', { eager: true, query: '?url', import: 'default' });
+
+  const getImage = (key) => allImages[`/src/assets/${key}.png`]
 
   useEffect(() => {
     localStorage.setItem('clans', JSON.stringify(clans));
@@ -101,8 +103,8 @@ function App() {
       <div className="firstColumn">
         {CLANS.map((clan) => 
           <div className='columnItem'>
-            {/* <img className="champIcon" src={`/src/assets/${clan}.png`} /> */}
-            {clan}
+            <img className="champIcon" src={getImage(clan)} />
+            {/* {clan} */}
           </div>)
         }</div>
     ]
@@ -143,10 +145,8 @@ function App() {
     <>
       <div>
         <div className="topRow">
-          <img className="mt2Icon" src={`${allImages['/src/assets/Train.png']}`} />
-           {/* {CLANS.map((clan) => <div className='topItem'><img className="champIcon" src={`/src/assets/${clan}.png`} /></div>)} */}
-          {/* <div className='mt2Icon'>MT2 ICON PLACEHOLDER</div> */}
-          {CLANS.map((clan) => <div className='topItem'>{clan}</div>)}
+          <img className="mt2Icon" src={getImage("Train")} />
+           {CLANS.map((clan) => <div className='topItem'><img className="champIcon" src={getImage(clan)} /></div>)}
         </div>
         {clans ? <div className="container">{renderRow()}</div> : <div>loading</div>}
         <button onClick={selectClan}>RANDOMIZE</button>
