@@ -116,17 +116,26 @@ function App() {
     return loadedClans || genDefaultClans()
   })
 
+  const [hasDlc, setHasDlc] = useState(() => {
+    const dlcStatus = JSON.parse(localStorage.getItem('hasDlc'));
+    return dlcStatus || false
+  })
+
   const [selectedClan, setSelectedClan] = useState("");
 
   const [altClan, setAltClan] = useState(0)
 
   const allImages = import.meta.glob('/src/assets/*.png', { eager: true, query: '?url', import: 'default' });
 
-  const getImage = (key) => allImages[`/src/assets/${key}.png`]
+  const getImage = (key) => allImages[`/src/assets/${key}.png`] || allImages[`/src/assets/ClanClanless.png`];
 
   useEffect(() => {
     localStorage.setItem('clans', JSON.stringify(clans));
   }, [clans]);
+
+  useEffect(() => {
+    localStorage.setItem('hasDlc', JSON.stringify(hasDlc));
+  }, [hasDlc]);
 
   const renderRow = () => {
     const rows = [
@@ -181,8 +190,10 @@ function App() {
            {CLANS.map((clan) => <div className='topItem'><img className="champIcon" src={getImage(clan)} /></div>)}
         </div>
         {clans ? <div className="container">{renderRow()}</div> : <div>loading</div>}
-        <button onClick={selectClan}>RANDOMIZE</button>
-        {selectedClan && <div>{`${selectedClan}(${altClan})`}</div>}
+        <div className="randomizeButtonContainer">
+          <button onClick={selectClan}>RANDOMIZE</button>
+          {selectedClan && <div>{`${selectedClan}(${altClan})`}</div>}
+        </div>
       </div>
     </>
   )

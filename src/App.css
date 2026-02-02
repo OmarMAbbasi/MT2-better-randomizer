@@ -53,3 +53,12 @@
   width: 150px;
   padding-right: 100px;
 }
+
+.randomizeButtonContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 150px;
+  min-width: 1320px;
+  flex-direction: column;
+}
