@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import Square from './Square.jsx'
 
-const CLANS = ["Banished", "Pyreborn", "Luna", "Underlegion", "Lazarus League", "Hellhorned", "Awoken", "Stygian Guard", "Umbra", "Melting Remnant"]
+const CLANS = ["Banished", "Pyreborn", "Luna", "Underlegion", "Lazarus League", "Hellhorned", "Awoken", "Stygian Guard", "Umbra", "Melting Remnant", "Wyrmkin", "Railforged"]
 const CHAMPION_MAP = {
   "Banished": ["Fel", "Talos"],
   "Pyreborn": ["Lord Fenix", "Lady Gilda"],
@@ -14,6 +14,8 @@ const CHAMPION_MAP = {
   "Stygian Guard": ["Tethys", "Solgard"],
   "Umbra": ["Penumbra", "Primordium"],
   "Melting Remnant": ["Flicker", "Fade"],
+  "Wyrmkin": ["Spine Chief", "Echowright"],
+  "Railforged": ["Herzal", "Heph"],
 }
 
 const SPELL_MAP = {
@@ -37,6 +39,10 @@ const SPELL_MAP = {
   "Primordium": "Plink",
   "Flicker": "Dreg",
   "Fade": "Stygian Mold",
+  "Spine Chief": "Fracture",
+  "Echowright": "Echo Break",
+  "Herzal": "Unknown Spell",
+  "Heph": "Unknown Spell",
 }
 
 const CHAMP_CLANS = {
@@ -60,6 +66,10 @@ const CHAMP_CLANS = {
   "Primordium": "Umbra",
   "Flicker": "Melting Remnant",
   "Fade": "Melting Remnant",
+  "Spine Chief": "Wyrmkin",
+  "Echowright": "Wyrmkin",
+  "Herzal": "Railforged",
+  "Heph": "Railforged",
 }
 
 const genDefaultClans = () => {
@@ -83,6 +93,26 @@ function App() {
 
   const [clans, setClans] = useState(() => {
     const loadedClans = JSON.parse(localStorage.getItem('clans'));
+    if (loadedClans && !loadedClans['Herzal']) {
+      const extra = ["Spine Chief", "Echowright", "Herzal", "Heph"];
+      Object.keys(loadedClans).forEach((champ) => {
+        extra.forEach((name) => {
+          if (!(name in loadedClans[champ])) {
+            loadedClans[champ][name] = false;
+          }
+        })
+      })
+      extra.forEach((name) => {
+        loadedClans[name] = {};
+        Object.keys(CHAMP_CLANS).forEach((clan) => {
+          if (CHAMP_CLANS[clan] !== name && CHAMP_CLANS[clan] !== name) {
+            loadedClans[name][clan] = false;
+          }
+        })
+      })
+    }
+
+
     return loadedClans || genDefaultClans()
   })
 
@@ -97,14 +127,14 @@ function App() {
   useEffect(() => {
     localStorage.setItem('clans', JSON.stringify(clans));
   }, [clans]);
-  
+
   const renderRow = () => {
     const rows = [
       <div className="firstColumn">
-        {CLANS.map((clan) => 
+        {CLANS.map((clan) =>
           <div className='columnItem'>
             <img className="champIcon" src={getImage(clan)} />
-            {/* {clan} */}
+            {clan}
           </div>)
         }</div>
     ]
@@ -145,7 +175,9 @@ function App() {
     <>
       <div>
         <div className="topRow">
-          <img className="mt2Icon" src={getImage("Train")} />
+          <div className="mt2IconContainer">
+            <img className="mt2Icon" src={getImage("Train")} />
+          </div>
            {CLANS.map((clan) => <div className='topItem'><img className="champIcon" src={getImage(clan)} /></div>)}
         </div>
         {clans ? <div className="container">{renderRow()}</div> : <div>loading</div>}

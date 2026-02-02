@@ -23,7 +23,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
+  min-width: 100px;
   padding: 5px;
 }
 
@@ -43,5 +43,13 @@
 .mt2Icon {
   height: 50px;
   width: 50px;
-  padding: 5px;
+  padding: 0px;
+}
+
+.mt2IconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  padding-right: 100px;
 }

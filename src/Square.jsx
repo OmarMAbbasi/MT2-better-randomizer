@@ -2,16 +2,18 @@ import { useState, useEffect } from 'react'
 import './Square.css'
 
 function Square({champ1, champ2, subClan, blocked, clans, setClans, getImage}) {
-  
+
   const handleClick = (champ) => {
     const newClans = structuredClone(clans)
     newClans[champ][subClan] = !clans[champ][subClan]
     setClans(newClans)
   }
-  
+
+  // console.log("Rendering Square:", {champ1, champ2, subClan, blocked, clans})
+
   return (
     <>
-    {!!!blocked ? 
+    {!blocked ?
       <div className="square">
         <div className={clans[champ1][subClan] ? "item-complete" : "item"} onClick={() => handleClick(champ1)}>
           <img className="champIcon" src={getImage(champ1)} />
