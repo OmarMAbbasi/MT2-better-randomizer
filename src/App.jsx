@@ -41,8 +41,8 @@ const SPELL_MAP = {
   "Fade": "Stygian Mold",
   "Spine Chief": "Fracture",
   "Echowright": "Echo Break",
-  "Herzal": "Unknown Spell",
-  "Heph": "Unknown Spell",
+  "Herzal": "Herzal Spell",
+  "Heph": "Heph Spell",
 }
 
 const CHAMP_CLANS = {
@@ -93,8 +93,8 @@ function App() {
 
   const [clans, setClans] = useState(() => {
     const loadedClans = JSON.parse(localStorage.getItem('clans'));
+    const extra = ["Spine Chief", "Echowright", "Herzal", "Heph"];
     if (loadedClans && !loadedClans['Herzal']) {
-      const extra = ["Spine Chief", "Echowright", "Herzal", "Heph"];
       Object.keys(loadedClans).forEach((champ) => {
         extra.forEach((name) => {
           if (!(name in loadedClans[champ])) {
@@ -102,17 +102,22 @@ function App() {
           }
         })
       })
-      extra.forEach((name) => {
-        loadedClans[name] = {};
-        Object.keys(CHAMP_CLANS).forEach((clan) => {
-          if (CHAMP_CLANS[clan] !== name && CHAMP_CLANS[clan] !== name) {
-            loadedClans[name][clan] = false;
-          }
-        })
-      })
     }
+    extra.forEach((name) => {
+      loadedClans[name] = {};
+      Object.keys(CHAMP_CLANS).forEach((clan) => {
+        if (CHAMP_CLANS[clan] !== name && CHAMP_CLANS[clan] !== name) {
+          loadedClans[name][CHAMP_CLANS[clan]] = false;
+        }
+      })
+    })
 
-
+    Object.keys(loadedClans).forEach((champ) => {
+      delete loadedClans[champ]['Spine Chief'];
+      delete loadedClans[champ]['Echowright'];
+      delete loadedClans[champ]['Herzal'];
+      delete loadedClans[champ]['Heph'];
+    })
     return loadedClans || genDefaultClans()
   })
 
