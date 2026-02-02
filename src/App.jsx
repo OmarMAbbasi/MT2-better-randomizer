@@ -102,22 +102,16 @@ function App() {
           }
         })
       })
-    }
-    extra.forEach((name) => {
-      loadedClans[name] = {};
-      Object.keys(CHAMP_CLANS).forEach((clan) => {
-        if (CHAMP_CLANS[clan] !== name && CHAMP_CLANS[clan] !== name) {
-          loadedClans[name][CHAMP_CLANS[clan]] = false;
-        }
+      extra.forEach((name) => {
+        loadedClans[name] = {};
+        Object.keys(CHAMP_CLANS).forEach((clan) => {
+          if (CHAMP_CLANS[clan] !== name && CHAMP_CLANS[clan] !== name) {
+            loadedClans[name][CHAMP_CLANS[clan]] = false;
+          }
+        })
       })
-    })
+    }
 
-    Object.keys(loadedClans).forEach((champ) => {
-      delete loadedClans[champ]['Spine Chief'];
-      delete loadedClans[champ]['Echowright'];
-      delete loadedClans[champ]['Herzal'];
-      delete loadedClans[champ]['Heph'];
-    })
     return loadedClans || genDefaultClans()
   })
 
@@ -132,7 +126,10 @@ function App() {
 
   const allImages = import.meta.glob('/src/assets/*.png', { eager: true, query: '?url', import: 'default' });
 
-  const getImage = (key) => allImages[`/src/assets/${key}.png`] || allImages[`/src/assets/ClanClanless.png`];
+  const getImage = (key) => {
+    const newKey = key.replace(' ', '_');
+    return allImages[`/src/assets/${newKey}.png`] || allImages[`/src/assets/ClanClanless.png`]
+  };
 
   useEffect(() => {
     localStorage.setItem('clans', JSON.stringify(clans));
