@@ -51,7 +51,7 @@
   justify-content: center;
   align-items: center;
   width: 150px;
-  padding-right: 100px;
+  padding-right: 10px;
 }
 
 .randomizeButtonContainer{
@@ -59,6 +59,6 @@
   justify-content: center;
   align-items: center;
   margin-left: 150px;
-  min-width: 1320px;
+  min-width: 1230px;
   flex-direction: column;
 }

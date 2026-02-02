@@ -143,7 +143,7 @@ function App() {
         {CLANS.map((clan) =>
           <div className='columnItem'>
             <img className="champIcon" src={getImage(clan)} />
-            {clan}
+            {/* {clan} */}
           </div>)
         }</div>
     ]
