@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import Square from './Square.jsx'
 
-const CLANS = ["Banished", "Pyreborn", "Luna", "Underlegion", "Lazarus League", "Hellhorned", "Awoken", "Stygian Guard", "Umbra", "Melting Remnant", "Wyrmkin", "Railforged"]
+const CLANS = ["Banished", "Pyreborn", "Luna", "Underlegion", "Lazarus League", "Hellhorned", "Awoken", "Stygian Guard", "Umbra", "Melting Remnant", "Wyrmkin", "Railforged", "Punished"]
 const CHAMPION_MAP = {
   "Banished": ["Fel", "Talos"],
   "Pyreborn": ["Lord Fenix", "Lady Gilda"],
@@ -16,6 +16,7 @@ const CHAMPION_MAP = {
   "Melting Remnant": ["Flicker", "Fade"],
   "Wyrmkin": ["Spine Chief", "Echowright"],
   "Railforged": ["Herzal", "Heph"],
+  "Punished": ["Archus", "Zariel"],
 }
 
 const SPELL_MAP = {
@@ -43,6 +44,8 @@ const SPELL_MAP = {
   "Echowright": "Echo Break",
   "Herzal": "Herzal Spell",
   "Heph": "Heph Spell",
+  "Archus": "Cruel Lesson",
+  "Zariel": "Shared Sentence",
 }
 
 const CHAMP_CLANS = {
@@ -70,6 +73,8 @@ const CHAMP_CLANS = {
   "Echowright": "Wyrmkin",
   "Herzal": "Railforged",
   "Heph": "Railforged",
+  "Archus": "Punished",
+  "Zariel": "Punished",
 }
 
 const genDefaultClans = () => {
@@ -103,6 +108,25 @@ function App() {
         })
       })
       extra.forEach((name) => {
+        loadedClans[name] = {};
+        Object.keys(CHAMP_CLANS).forEach((clan) => {
+          if (CHAMP_CLANS[clan] !== name && CHAMP_CLANS[clan] !== name) {
+            loadedClans[name][CHAMP_CLANS[clan]] = false;
+          }
+        })
+      })
+    }
+
+    const extra2 = ["Archus", "Zariel"];
+    if (loadedClans && !loadedClans['Archus']) {
+      Object.keys(loadedClans).forEach((champ) => {
+        extra2.forEach((name) => {
+          if (!(name in loadedClans[champ])) {
+            loadedClans[champ][name] = false;
+          }
+        })
+      })
+      extra2.forEach((name) => {
         loadedClans[name] = {};
         Object.keys(CHAMP_CLANS).forEach((clan) => {
           if (CHAMP_CLANS[clan] !== name && CHAMP_CLANS[clan] !== name) {

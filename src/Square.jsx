@@ -10,7 +10,6 @@ function Square({champ1, champ2, subClan, blocked, clans, setClans, getImage}) {
   }
 
   // console.log("Rendering Square:", {champ1, champ2, subClan, blocked, clans})
-
   return (
     <>
     {!blocked ?
